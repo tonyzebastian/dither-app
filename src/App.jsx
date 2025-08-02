@@ -44,38 +44,45 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-gray-50">
       <Header />
-      <div className="flex flex-1">
-        <Sidebar 
-          className="w-80 border-r bg-muted/30 p-4" 
-          onDotSizeChange={handleDotSizeChange}
-          onAnimationTypeChange={handleAnimationTypeChange}
-          onPlayPause={handlePlayPause}
-          onMonochromeChange={handleMonochromeChange}
-          onBackgroundColorChange={handleBackgroundColorChange}
-          processedImage={processedImage}
-          dotShape={dotShape}
-          dotSize={dotSize}
-          colorCount={colorCount}
-          animationType={animationType}
-          isPlaying={isPlaying}
-          isMonochrome={isMonochrome}
-          backgroundColor={backgroundColor}
-        />
-        <MainCanvas 
-          className="flex-1 p-4" 
-          processedImage={processedImage}
-          onImageProcessed={handleImageProcessed}
-          colorCount={colorCount}
-          dotShape={dotShape}
-          dotSize={dotSize}
-          isMonochrome={isMonochrome}
-          animationType={animationType}
-          isPlaying={isPlaying}
-          backgroundColor={backgroundColor}
-        />
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-8">
+          <Sidebar 
+            className="w-96 flex-shrink-0" 
+            onDotSizeChange={handleDotSizeChange}
+            onAnimationTypeChange={handleAnimationTypeChange}
+            onPlayPause={handlePlayPause}
+            onMonochromeChange={handleMonochromeChange}
+            onBackgroundColorChange={handleBackgroundColorChange}
+            processedImage={processedImage}
+            dotShape={dotShape}
+            dotSize={dotSize}
+            colorCount={colorCount}
+            animationType={animationType}
+            isPlaying={isPlaying}
+            isMonochrome={isMonochrome}
+            backgroundColor={backgroundColor}
+          />
+          <MainCanvas 
+            className="flex-1 min-h-[600px]" 
+            processedImage={processedImage}
+            onImageProcessed={handleImageProcessed}
+            colorCount={colorCount}
+            dotShape={dotShape}
+            dotSize={dotSize}
+            isMonochrome={isMonochrome}
+            animationType={animationType}
+            isPlaying={isPlaying}
+            backgroundColor={backgroundColor}
+          />
+        </div>
       </div>
+      <footer className="bg-white border-t py-4 mt-12">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-sm text-gray-500">Created by tonyzeb.design</p>
+        </div>
+      </footer>
     </div>
   )
 }

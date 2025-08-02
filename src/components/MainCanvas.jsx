@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react"
-import { Card } from "./ui/card"
 import { Button } from "./ui/button"
 import { Alert, AlertDescription } from "./ui/alert"
-import { Upload, FileImage, AlertCircle, Loader2, X, RefreshCw } from "lucide-react"
+import { Upload, AlertCircle, Loader2, X, RefreshCw } from "lucide-react"
 import { cn } from "../lib/utils"
 import { DitheredRenderer } from "../utils/DitheredRenderer"
 import { AnimationController } from "../utils/AnimationController"
@@ -180,73 +179,52 @@ export default function MainCanvas({
   return (
     <main className={cn("flex flex-col", className)}>
       <div className="flex-1 flex items-center justify-center">
-        <Card 
-          className={`w-full max-w-4xl border-2 border-dashed ${
+        <div 
+          className={`w-full max-w-4xl border-2 border-dashed rounded-3xl ${
             isDragOver 
-              ? 'border-primary bg-primary/5' 
+              ? 'border-blue-400 bg-blue-50' 
               : processedImage 
-                ? 'border-muted-foreground/25 bg-muted/10'
-                : 'border-muted-foreground/25 bg-muted/10 hover:border-muted-foreground/50 hover:bg-muted/5'
+                ? 'border-gray-300 bg-white'
+                : 'border-gray-300 bg-white hover:border-gray-400'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="w-full h-full flex items-center justify-center p-8">
+          <div className="w-full h-full flex items-center justify-center p-12">
             {processedImage ? (
-              <div className="relative max-w-full max-h-full space-y-4">
+              <div className="relative max-w-full max-h-full space-y-6">
                 <canvas 
                   ref={canvasRef}
-                  className="max-w-full max-h-full border rounded shadow-sm bg-white"
+                  className="max-w-full max-h-full rounded-2xl shadow-sm bg-white"
                   style={{ 
                     imageRendering: 'pixelated',
                     maxWidth: '100%',
                     height: 'auto'
                   }}
                 />
-                
-                {/* Image Controls */}
-                <div className="flex gap-2 justify-center">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={handleChooseAnother}
-                    disabled={isProcessing}
-                  >
-                    <RefreshCw className="mr-2 h-4 w-4" />
-                    Choose Another
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={handleRemoveImage}
-                    disabled={isProcessing}
-                  >
-                    <X className="mr-2 h-4 w-4" />
-                    Remove Image
-                  </Button>
-                </div>
               </div>
             ) : (
-              <div className="text-center space-y-4 max-w-md">
-                <div className="mx-auto h-16 w-16 rounded-full bg-muted/20 flex items-center justify-center">
-                  <Upload className="h-8 w-8 text-muted-foreground" />
+              <div className="text-center space-y-6 max-w-md">
+                <div className="mx-auto h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
+                  <Upload className="h-8 w-8 text-gray-400" />
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-medium">
-                    {isProcessing ? 'Processing image...' : 'Upload an image'}
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {isProcessing ? 'Processing image...' : 'Upload Image'}
                   </h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {isProcessing ? 'Please wait while we process your image' : 'Drag and drop or click to browse'}
+                  <p className="text-gray-600 mb-1">
+                    {isProcessing ? 'Please wait while we process your image' : 'Drag & drop or click to browse'}
                   </p>
-                  <p className="text-xs text-muted-foreground/75 mt-1">
-                    Max 5MB • JPG, PNG, WebP
+                  <p className="text-sm text-gray-500">
+                    Max 5 MB • JPG, PNG, WebP
                   </p>
                 </div>
 
                 <Button 
                   variant="outline" 
+                  className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
                   onClick={() => document.getElementById('file-input').click()}
                   disabled={isProcessing}
                 >
@@ -256,10 +234,7 @@ export default function MainCanvas({
                       Processing...
                     </>
                   ) : (
-                    <>
-                      <FileImage className="mr-2 h-4 w-4" />
-                      Choose File
-                    </>
+                    'Choose Image'
                   )}
                 </Button>
                 
@@ -273,12 +248,38 @@ export default function MainCanvas({
               </div>
             )}
           </div>
-        </Card>
+        </div>
       </div>
+
+      {/* Image Controls - shown when image is loaded */}
+      {processedImage && (
+        <div className="flex gap-3 justify-center mt-6">
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
+            onClick={handleChooseAnother}
+            disabled={isProcessing}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            Choose Another
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
+            onClick={handleRemoveImage}
+            disabled={isProcessing}
+          >
+            <X className="mr-2 h-4 w-4" />
+            Remove Image
+          </Button>
+        </div>
+      )}
       
       {/* Error Display */}
       {error && (
-        <div className="mt-4">
+        <div className="mt-6">
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
@@ -286,21 +287,14 @@ export default function MainCanvas({
         </div>
       )}
       
-      {/* Status Bar */}
-      <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground bg-muted/20 rounded px-3 py-2">
-        <span>
-          {processedImage 
-            ? (isPlaying ? `▶ Animating (${animationType})` : 'Image processed')
-            : 'Ready'
-          }
-        </span>
-        <span>
-          {processedImage 
-            ? `${processedImage.dots?.length || 0} dots • ${processedImage.dimensions?.width}×${processedImage.dimensions?.height}px • ${dotShape} • Size: ${dotSize}% ${isMonochrome ? '• Mono' : ''}`
-            : 'No image loaded'
-          }
-        </span>
-      </div>
+      {/* Image Info - shown at bottom when image is loaded */}
+      {processedImage && (
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-500">
+            {processedImage.dots?.length || 0} dots • {processedImage.dimensions?.width}×{processedImage.dimensions?.height}px • circle • Size: {dotSize}%
+          </p>
+        </div>
+      )}
     </main>
   )
 }
