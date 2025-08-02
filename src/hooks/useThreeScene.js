@@ -1,0 +1,1 @@
+// useThreeScene hook placeholder

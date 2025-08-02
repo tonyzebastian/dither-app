@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm test)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(npx shadcn-ui:*)",
+      "Bash(npm test:*)"
+    ],
+    "deny": []
+  }
+}

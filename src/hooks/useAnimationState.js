@@ -1,0 +1,1 @@
+// useAnimationState hook placeholder
