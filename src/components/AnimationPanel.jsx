@@ -29,7 +29,7 @@ export default function AnimationPanel({
             }}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-3 ">
               <TabsTrigger value="wave">Wave</TabsTrigger>
               <TabsTrigger value="ripple">Ripple</TabsTrigger>
               <TabsTrigger value="pulse">Pulse</TabsTrigger>
@@ -37,7 +37,7 @@ export default function AnimationPanel({
           </Tabs>
         </div>
         
-        <div className="flex gap-2">
+        <div className="flex gap-2 ">
           <Button 
             variant="outline" 
             size="sm" 

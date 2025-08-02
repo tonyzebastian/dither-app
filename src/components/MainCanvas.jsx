@@ -180,51 +180,77 @@ export default function MainCanvas({
     <main className={cn("flex flex-col", className)}>
       <div className="flex-1 flex items-center justify-center">
         <div 
-          className={`w-full max-w-4xl border border-dotted ${
+          className={`w-full border ${
+            processedImage ? '' : 'aspect-[4/3]'
+          } ${
             isDragOver 
               ? 'border-blue-400 bg-blue-50' 
               : processedImage 
-                ? 'border-gray-300 bg-white'
-                : 'border-gray-300 bg-white hover:border-gray-400'
+                ? 'border-slate-400 bg-white rounded-lg'
+                : 'border-dashed  border-slate-300 bg-slate-50/50 hover:border-slate-400 rounded-lg'
           }`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="w-full h-full flex items-center justify-center p-12">
+          <div className={`w-full ${processedImage ? '' : 'h-full'} flex flex-col items-center justify-center p-12 relative`}>
             {processedImage ? (
-              <div className="relative max-w-full max-h-full space-y-6">
-                <canvas 
-                  ref={canvasRef}
-                  className="max-w-full max-h-full bg-white"
-                  style={{ 
-                    imageRendering: 'pixelated',
-                    maxWidth: '100%',
-                    height: 'auto'
-                  }}
-                />
-              </div>
+              <>
+                <div className="flex items-center justify-center w-full">
+                  <canvas 
+                    ref={canvasRef}
+                    className="bg-white"
+                    style={{ 
+                      imageRendering: 'pixelated'
+                    }}
+                  />
+                </div>
+                
+                {/* Image Controls - inside container */}
+                <div className="flex gap-3 mt-6">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+                    onClick={handleChooseAnother}
+                    disabled={isProcessing}
+                  >
+                    <RefreshCw className="mr-2 h-4 w-4" />
+                    Choose Another
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
+                    onClick={handleRemoveImage}
+                    disabled={isProcessing}
+                  >
+                    <X className="mr-2 h-4 w-4" />
+                    Remove Image
+                  </Button>
+                </div>
+              </>
             ) : (
               <div className="text-center space-y-6 max-w-md">
-                <div className="mx-auto h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
-                  <Upload className="h-8 w-8 text-gray-400" />
+                <div className="mx-auto h-12 w-12 rounded-full bg-slate-100 flex items-center justify-center">
+                  <Upload className="h-6 w-6 text-slate-400" />
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold text-slate-900 mb-2">
                     {isProcessing ? 'Processing image...' : 'Upload Image'}
                   </h3>
-                  <p className="text-gray-600 mb-1">
+                  <p className="text-slate-600 mb-1">
                     {isProcessing ? 'Please wait while we process your image' : 'Drag & drop or click to browse'}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-500">
                     Max 5 MB • JPG, PNG, WebP
                   </p>
                 </div>
 
                 <Button 
                   variant="outline" 
-                  className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
+                  className="bg-white border-slate-300 text-slate-700 hover:bg-slate-50"
                   onClick={() => document.getElementById('file-input').click()}
                   disabled={isProcessing}
                 >
@@ -250,32 +276,6 @@ export default function MainCanvas({
           </div>
         </div>
       </div>
-
-      {/* Image Controls - shown when image is loaded */}
-      {processedImage && (
-        <div className="flex gap-3 justify-center mt-6">
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
-            onClick={handleChooseAnother}
-            disabled={isProcessing}
-          >
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Choose Another
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="bg-white border-gray-300 text-gray-700 hover:bg-gray-50"
-            onClick={handleRemoveImage}
-            disabled={isProcessing}
-          >
-            <X className="mr-2 h-4 w-4" />
-            Remove Image
-          </Button>
-        </div>
-      )}
       
       {/* Error Display */}
       {error && (
@@ -284,16 +284,6 @@ export default function MainCanvas({
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
-        </div>
-      )}
-      
-      {/* Image Info - shown at bottom when image is loaded */}
-      {processedImage && (
-        <div className="mt-6 flex justify-between items-center text-sm text-gray-500">
-          <span>Created by tonyzeb.design</span>
-          <span>
-            {processedImage.dots?.length || 0} dots • {processedImage.dimensions?.width}×{processedImage.dimensions?.height}px • circle • Size: {dotSize}%
-          </span>
         </div>
       )}
     </main>

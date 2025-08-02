@@ -1,4 +1,3 @@
-import { Card, CardContent } from "./ui/card"
 import { Button } from "./ui/button"
 import { Switch } from "./ui/switch"
 import { Slider } from "./ui/slider"
@@ -35,8 +34,7 @@ export default function Configurations({
   ]
 
   return (
-    <Card>
-      <CardContent className="p-4 space-y-4">
+    <div className="space-y-4">
         {/* Monochrome Mode - First Setting */}
         <div className="flex items-center justify-between">
           <Label htmlFor="monochrome" className="text-sm font-medium">
@@ -148,7 +146,6 @@ export default function Configurations({
             )}
           </Button>
         </div>
-      </CardContent>
-    </Card>
+    </div>
   )
 }

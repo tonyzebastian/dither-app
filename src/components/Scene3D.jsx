@@ -1,1 +1,0 @@
-// Scene3D component placeholder
