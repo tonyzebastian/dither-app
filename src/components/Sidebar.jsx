@@ -39,8 +39,8 @@ export default function Sidebar({
           />
         </div>
         
-        <div className="pt-6">
-          <h2 className="mb-4 text-sm font-medium text-slate-900">Export Options</h2>
+        <div className="pt-6 border-t border-slate-200">
+          <h2 className="mb-4 text-sm font-medium text-slate-700">Export Options</h2>
           <ExportControls disabled={!processedImage} />
         </div>
       </div>

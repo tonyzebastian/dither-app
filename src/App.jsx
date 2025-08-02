@@ -44,11 +44,11 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white mt-16">
+    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-indigo-300">
       <Header />
-      <div className="max-w-7xl mx-auto px-4 pt-4">
-        <div className="bg-white border border-slate-200 rounded-xl p-8 shadow-sm">
-          <div className="flex gap-12">
+      <div className={`${processedImage ? 'w-fit' : 'max-w-6xl'} mx-auto px-6 pt-8`}>
+        <div className="bg-white/95 backdrop-blur-md border border-white/30 rounded-3xl p-10 shadow-2xl shadow-black/10">
+          <div className="flex gap-8 items-start">
             <Sidebar 
               className="w-80 flex-shrink-0" 
               onDotSizeChange={handleDotSizeChange}
@@ -83,9 +83,9 @@ function App() {
       </div>
       
       {/* Creator details - always visible, outside main card */}
-      <div className="max-w-7xl mx-auto px-4 pt-4">
-        <div className="flex justify-between items-center text-sm text-slate-500">
-          <span>Created by <a href='https://www.tonyzeb.design' target="_blank">tonyzeb.design</a></span>
+      <div className="max-w-6xl mx-auto px-6 pt-4">
+        <div className="flex justify-between items-center text-sm text-white/70">
+          <span>Created by <a href='https://www.tonyzeb.design' target="_blank" className="text-white/90 hover:text-white underline">tonyzeb.design</a></span>
           {processedImage && (
             <span>
               {processedImage.dots?.length || 0} dots • {processedImage.dimensions?.width}×{processedImage.dimensions?.height}px • circle • Size: {dotSize}%

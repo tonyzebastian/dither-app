@@ -177,10 +177,10 @@ export default function MainCanvas({
   }, [])
 
   return (
-    <main className={cn("flex flex-col", className)}>
+    <main className={cn("flex flex-col min-h-full", className)}>
       <div className="flex-1 flex items-center justify-center">
         <div 
-          className={`w-full border ${
+          className={`${processedImage ? 'w-fit' : 'w-full'} border ${
             processedImage ? '' : 'aspect-[4/3]'
           } ${
             isDragOver 
@@ -193,7 +193,7 @@ export default function MainCanvas({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className={`w-full ${processedImage ? '' : 'h-full'} flex flex-col items-center justify-center p-12 relative`}>
+          <div className={`${processedImage ? 'w-fit' : 'w-full h-full'} flex flex-col items-center justify-center ${processedImage ? 'p-6' : 'p-12'} relative`}>
             {processedImage ? (
               <>
                 <div className="flex items-center justify-center w-full">
