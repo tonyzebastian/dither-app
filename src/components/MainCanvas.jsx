@@ -180,7 +180,7 @@ export default function MainCanvas({
     <main className={cn("flex flex-col", className)}>
       <div className="flex-1 flex items-center justify-center">
         <div 
-          className={`w-full max-w-4xl border-2 border-dashed rounded-3xl ${
+          className={`w-full max-w-4xl border border-dotted ${
             isDragOver 
               ? 'border-blue-400 bg-blue-50' 
               : processedImage 
@@ -196,7 +196,7 @@ export default function MainCanvas({
               <div className="relative max-w-full max-h-full space-y-6">
                 <canvas 
                   ref={canvasRef}
-                  className="max-w-full max-h-full rounded-2xl shadow-sm bg-white"
+                  className="max-w-full max-h-full bg-white"
                   style={{ 
                     imageRendering: 'pixelated',
                     maxWidth: '100%',
@@ -289,10 +289,11 @@ export default function MainCanvas({
       
       {/* Image Info - shown at bottom when image is loaded */}
       {processedImage && (
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-500">
+        <div className="mt-6 flex justify-between items-center text-sm text-gray-500">
+          <span>Created by tonyzeb.design</span>
+          <span>
             {processedImage.dots?.length || 0} dots • {processedImage.dimensions?.width}×{processedImage.dimensions?.height}px • circle • Size: {dotSize}%
-          </p>
+          </span>
         </div>
       )}
     </main>

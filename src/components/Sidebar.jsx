@@ -20,8 +20,8 @@ export default function Sidebar({
   backgroundColor
 }) {
   return (
-    <aside className={cn("bg-white rounded-2xl p-6 shadow-sm border border-gray-100", className)}>
-      <div className="space-y-8">
+    <aside className={cn("", className)}>
+      <div className="space-y-6">
         {/* Configurations Section */}
         <div>
           <Configurations 
@@ -39,8 +39,8 @@ export default function Sidebar({
           />
         </div>
         
-        <div className="border-t border-gray-100 pt-8">
-          <h2 className="mb-4 text-sm font-semibold text-gray-900">Export Options</h2>
+        <div className="pt-6">
+          <h2 className="mb-4 text-sm font-medium text-gray-900">Export Options</h2>
           <ExportControls disabled={!processedImage} />
         </div>
       </div>

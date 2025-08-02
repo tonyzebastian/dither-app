@@ -47,9 +47,9 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex gap-8">
+        <div className="flex gap-12">
           <Sidebar 
-            className="w-96 flex-shrink-0" 
+            className="w-80 flex-shrink-0" 
             onDotSizeChange={handleDotSizeChange}
             onAnimationTypeChange={handleAnimationTypeChange}
             onPlayPause={handlePlayPause}
@@ -78,11 +78,6 @@ function App() {
           />
         </div>
       </div>
-      <footer className="bg-white border-t py-4 mt-12">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-sm text-gray-500">Created by tonyzeb.design</p>
-        </div>
-      </footer>
     </div>
   )
 }
